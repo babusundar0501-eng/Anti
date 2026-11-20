@@ -72,3 +72,12 @@ main.cpp, header.rs, guard.ps1 and 1.py are experimental samples. They are not c
 6. Platform-specific validation on Windows, macOS and Linux.
 
 Security claims must be backed by reproducible tests.
+
+
+## AntiOS browser workspace
+
+Open `os/index.html` in a modern browser. It provides an OS-style desktop, Anti scanner for files you explicitly select, file inspector, and a safe in-memory test lab. No files are uploaded.
+
+This is a **browser workspace, not a bootable operating system**. Browser sandboxing prevents it from scanning the entire computer, monitoring processes or memory, enforcing system quarantine, or providing real-time protection. Use the Python scanner (`anti.py`) for on-demand filesystem scans and keep the operating system's built-in antivirus enabled.
+
+The AntiOS test lab checks EICAR test-string detection, a harmless executable-header/document-extension mismatch fixture, benign text handling, and SHA-256 generation. GitHub Actions runs a Chromium smoke test for these browser checks. Passing these tests does not establish real-world malware detection effectiveness.
