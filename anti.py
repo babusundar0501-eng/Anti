@@ -48,7 +48,9 @@ def inspect_file(path):
         if pe:
             hits=[x.decode("ascii") for x in INJECTION_APIS if x in data]
             if len(hits)>=2:
-                r["status"]="suspicious";r["severity"]="high";r["reasons"].append("Multiple process-injection API names: "+", ".join(hits))
+                if r["status"]!="threat":
+                    r["status"]="suspicious";r["severity"]="high"
+                r["reasons"].append("Multiple process-injection API names: "+", ".join(hits))
             if r["entropy"]>=7.75 and r["status"]=="clean":
                 r["status"]="suspicious";r["severity"]="medium";r["reasons"].append("Very high PE sample entropy; packing/encryption is possible")
         if r["status"]=="clean":r["reasons"].append("No configured indicators found (not proof of safety)")
