@@ -1,0 +1,22 @@
+name: AntiOS browser tests
+on:
+  push:
+    paths:
+      - "os/**"
+      - ".github/workflows/anti-os.yml"
+  pull_request:
+    paths:
+      - "os/**"
+      - ".github/workflows/anti-os.yml"
+  workflow_dispatch:
+jobs:
+  browser-smoke-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-save playwright
+      - run: npx playwright install --with-deps chromium
+      - run: node os/smoke-test.cjs
